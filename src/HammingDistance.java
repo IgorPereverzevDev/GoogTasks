@@ -1,6 +1,4 @@
-/**
- * Created by zorg9 on 20.12.2017.
- */
+
 public class HammingDistance {
 
      static int solution(int x, int y) {
