@@ -8,20 +8,19 @@ public class Parentheses {
         if(str.isEmpty()) {
             return false;
         }
-        Stack stack = new Stack();
+        Stack<Character> stack = new Stack<>();
         char[] array = str.toCharArray();
-        for (int i = 0; i < array.length; ++i) {
-            if (!stack.contains(array[i])) {
-                char current = array[i];
-                if (current == '(' || current == '{' || current == '[') {
-                    stack.push(array[i]);
+        for (char anArray : array) {
+            if (!stack.contains(anArray)) {
+                if (anArray == '(' || anArray == '{' || anArray == '[') {
+                    stack.push(anArray);
                 }
-                if (current == '}' || current == ')' || current == ']') {
+                if (anArray == '}' || anArray == ')' || anArray == ']') {
                     if (stack.empty()) {
                         return false;
                     }
-                    char last = (char) stack.peek();
-                    if (current == '}' && last == '{' || current == ')' && last == '(' || current == ']' && last == '[')
+                    char last = stack.peek();
+                    if (anArray == '}' && last == '{' || anArray == ')' && last == '(' || anArray == ']' && last == '[')
                         stack.pop();
                     else
                         return false;
