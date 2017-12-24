@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SelfDividingNumber {
 
-    public List<Integer> getSelfDividingNumbers(int left, int right) {
+     List<Integer> getSelfDividingNumbers(int left, int right) {
         if (left == 0 && right == 0) {
             return null;
         }
