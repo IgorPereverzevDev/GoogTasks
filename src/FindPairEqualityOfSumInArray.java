@@ -1,8 +1,6 @@
 import java.util.HashSet;
 
-/**
- * Created by zorg9 on 12.12.2017.
- */
+
 public class FindPairEqualityOfSumInArray {
 
     static boolean solution(final int[] array,  final int target) {

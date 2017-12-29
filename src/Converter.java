@@ -1,6 +1,4 @@
-/**
- * Created by zorg9 on 14.12.2017.
- */
+
 public class Converter {
 
     public static void binaryConverting(int n) {

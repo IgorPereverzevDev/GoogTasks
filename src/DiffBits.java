@@ -1,6 +1,4 @@
-/**
- * Created by zorg9 on 26.12.2017.
- */
+
 public class DiffBits {
 
     static int findComplement(int num) {

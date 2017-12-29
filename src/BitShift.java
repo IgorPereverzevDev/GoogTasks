@@ -1,6 +1,4 @@
-/**
- * Created by zorg9 on 12.12.2017.
- */
+
 public class BitShift {
 
 

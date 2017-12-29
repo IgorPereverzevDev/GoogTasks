@@ -11,7 +11,7 @@ public class SumOfTwoArrays {
         int b1 = IntStream.range(0, b.length).reduce(0, (acc, y) -> acc + (int) Math.pow(10, y) * b[b.length - y - 1]);
         return Integer.toString(a1 + b1).chars().map(c -> c -= '0').toArray();
     }
-
+    
     public static void main(String[] args) {
         int[] a = {1, 5, 2};
         int[] b = {4, 2, 6, 7};
