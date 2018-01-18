@@ -1,10 +1,12 @@
-public class Matrix {
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+public class Matrix {
     public static int[][] solution(int N,int[][] a) {
         if (a == null) {
             return null;
         }
-
         for (int x = 0; x < N/2; ++x) {
             for (int y = x; y < N-x-1; ++y) {
                 int temp = a[x][y];
@@ -45,4 +47,5 @@ public class Matrix {
             System.out.println();
         }
     }
+
 }

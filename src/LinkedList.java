@@ -3,10 +3,14 @@ public class LinkedList {
     class Node {
         int data;
         Node next;
+
+        public Node(int data) {
+            this.data = data;
+        }
     }
 
     Node InsertAfter(Node head, int data) {
-        Node newNode = new Node();
+        Node newNode = new Node(5);
         newNode.data = data;
         newNode.next = null;
 
@@ -24,14 +28,31 @@ public class LinkedList {
     }
 
     Node InsertBefore(Node head,int x) {
-        Node newNode = new Node();
+        Node newNode = new Node(5);
         newNode.data = x;
         newNode.next = head;
         return newNode;
     }
 
+    public static Node reverse(Node currentNode) {
+
+       Node previousNode=null;
+       Node nextNode;
+        while(currentNode!=null) {
+            nextNode=currentNode.next;
+            // reversing the link
+            currentNode.next=previousNode;
+            // moving currentNode and previousNode by 1 node
+            previousNode=currentNode;
+            currentNode=nextNode;
+        }
+        return previousNode;
+
+    }
+
+
     Node InsertNth(Node head, int data, int position) {
-        Node newNode = new Node();
+        Node newNode = new Node(5);
         newNode.data = data;
         // scenario when head is null
         if (head == null) {

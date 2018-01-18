@@ -5,7 +5,7 @@ import java.util.Stack;
  */
 public class Parentheses {
     static boolean solution(String str) {
-        if(str.isEmpty()) {
+        if (str.isEmpty()) {
             return false;
         }
         Stack<Character> stack = new Stack<>();
