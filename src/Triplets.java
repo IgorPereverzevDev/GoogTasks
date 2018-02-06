@@ -1,4 +1,5 @@
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class Triplets {
@@ -13,7 +14,6 @@ public class Triplets {
                 }
                 comp.add(value);
             }
-
         }
         return false;
     }

@@ -1,6 +1,3 @@
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class Matrix {
     public static int[][] solution(int N,int[][] a) {
