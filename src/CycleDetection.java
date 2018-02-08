@@ -40,4 +40,24 @@ public class CycleDetection {
         iterate(x0, f).skip(start).limit(len)
                 .forEach(n -> System.out.printf("%s ", n));
     }
+
+ /**
+public class CompleteCycleInCircularArray {
+    /**
+     * Let n = length(arr).
+     * Time complexity:  O(n)
+     * Space complexity: O(1)
+     */
+    public static boolean f(int[] arr) {
+        final int n = arr.length;
+        int index = 0;  // starting index, the value does not matter if there is indeed a complete cycle
+        for(int i = 0; i < n; i++) {  // at most n steps
+            // in Java
+            index = ((index + arr[index]) % n + n) % n;
+            if(index == 0 && i < n - 1) {  // subcyle
+                return false;
+            }
+        }
+        return index == 0;  // are we back to the original cell after n steps
+    }
 }
