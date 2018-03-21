@@ -1,3 +1,4 @@
+import java.util.HashMap;
 
 public class DiffBits {
 
@@ -10,6 +11,8 @@ public class DiffBits {
         i |= (i >> 16);
         return num ^ ((i & ~(i >> 1)) << 1) - 1;
     }
+
+
 
 
     public static void main(String[] args) {
