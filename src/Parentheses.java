@@ -9,8 +9,8 @@ public class Parentheses {
             return false;
         }
         Stack<Character> stack = new Stack<>();
-        char[] array = str.toCharArray();
-        for (char anArray : array) {
+        var array = str.toCharArray();
+        for (var anArray : array) {
             if (!stack.contains(anArray)) {
                 if (anArray == '(' || anArray == '{' || anArray == '[') {
                     stack.push(anArray);
@@ -20,18 +20,20 @@ public class Parentheses {
                         return false;
                     }
                     char last = stack.peek();
-                    if (anArray == '}' && last == '{' || anArray == ')' && last == '(' || anArray == ']' && last == '[')
+                    if (anArray == '}' && last == '{' || anArray == ')' && last == '(' || anArray == ']' && last == '[') {
                         stack.pop();
-                    else
+                    } else {
                         return false;
+                    }
                 }
             }
         }
         return true;
     }
 
+
     public static void main(String[] args) {
-        String str = "{{[[(())]]}}";
+        var str = "({()})";
         System.out.println(solution(str));
     }
 

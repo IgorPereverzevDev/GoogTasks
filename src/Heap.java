@@ -1,137 +1,94 @@
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-public class Heap {
+class Heap {
 
-    int[] heap;
-    int size;
+    private List<Node> theHeap;
+    private List<Node> workHeap;
 
-    public Heap(int[] heap) {
-        this.size = heap.length;
-        this.heap = Arrays.copyOf(heap, size);
+    Heap(int maxSize) {
+        theHeap = new ArrayList<>(maxSize);
     }
 
-    /**
-     * Makes the array {@param a} satisfy the max heap property starting from
-     * {@param index} till the end of array.
-     * <p/>
-     * version of maxHeapify.
-     * <p/>
-     * Time complexity: O(log n).
-     *
-     * @param index
-     */
-    public void maxHeapify(int index) {
-        int largest = index;
-        int leftIndex = 2 * index + 1;
-        int rightIndex = 2 * index + 2;
-
-        if (leftIndex < size && heap[index] < heap[leftIndex]) {
-            largest = leftIndex;
-        }
-        if (rightIndex < size && heap[largest] < heap[rightIndex]) {
-            largest = rightIndex;
+    private void heapSort() {
+        for (var k = workHeap.size() - 1; k >= 0; --k) {
+            workHeap.add(pop());
         }
 
-        if (largest != index) {
-            swap(index, largest);
-            maxHeapify(largest);
-        }
+
     }
 
-    /**
-     * Converts array {@param a} in to a max heap.
-     * <p/>
-     * Time complexity: O(n) and is not O(n log n).
-     */
-    public void buildMaxHeap() {
-        for (int i = size / 2 - 1; i >= 0; i--) {
-            maxHeapify(i);
+    public void insert(int num) {
+        theHeap.add(new Node(num));
+        workHeap = new ArrayList<>(theHeap);
+        if (workHeap.size() != 1) {
+            heapSort();
         }
+        calculateMedian();
     }
 
-    /**
-     * Insert a new element into the heap satisfying
-     * the heap property.
-     *
-     * Time complexity: O(log n) where 'n' is total no. of
-     * elements in heap or O(h) where 'h' is the height of
-     * heap.
-     *
-     * @param elem
-     */
-    public void insert(int elem) {
-        // increase heap size
-        heap = Arrays.copyOf(heap, size + 1);
-        int i = size;
-        int parentIndex = (int) Math.floor((i - 1) / 2);
-        // move up through the heap till you find the right position
-        while (i > 0 && elem > heap[parentIndex]) {
-            heap[i] = heap[parentIndex];
-            i = parentIndex;
-            parentIndex = (int) Math.floor((i - 1) / 2);
-        }
-        heap[i] = elem;
-        size++;
-    }
-
-    public int findMax() {
-        if (size == 0) {
-            return -1;
+    private void calculateMedian() {
+        var pivotal = (workHeap.size() - 1) >>> 1;
+        if ((workHeap.size() & 1) == 0) {
+            var median = (workHeap.get(pivotal).key + workHeap.get(pivotal + 1).key) >>> 1;
+            System.out.println((double) median);
         } else {
-            return heap[0];
+            System.out.println((double) workHeap.get(pivotal).key);
         }
     }
 
-    public int extractMax() {
-        if (size == 0) return -1;
-
-        int min = heap[0];
-        heap[0] = heap[size - 1];
-        size--;
-        maxHeapify(0);
-        return min;
+    private Node pop() {
+        var root = workHeap.get(0);
+        heapTheArray(workHeap.size() - 1);
+        return root;
     }
 
-    public int getSize() {
-        return size;
-    }
-
-    public int[] getHeap() {
-        return heap;
-    }
-
-    public void printHeap() {
-        if (heap == null)
-            System.out.print("null");
-        int iMax = size - 1, i;
-        if (iMax == -1)
-            System.out.print("[]");
-
-        StringBuilder b = new StringBuilder();
-        b.append('[');
-        for (i = 0; i < iMax; i++) {
-            b.append(heap[i]);
-            b.append(", ");
+    private void heapTheArray(int num) {
+        var largestChild = 0;
+        while (workHeap.size() < workHeap.size() >>> 1) {
+            var leftChild = 2 * num + 1;
+            var rightChild = leftChild + 1;
+            if (rightChild < workHeap.size() && workHeap.get(leftChild).key < workHeap.get(rightChild).key) {
+                largestChild = rightChild;
+            }
+            if (leftChild < workHeap.size() && workHeap.get(rightChild).key < workHeap.get(leftChild).key) {
+                largestChild = leftChild;
+            }
+            if (workHeap.get(num).key >= workHeap.get(largestChild).key) {
+                break;
+            }
+            workHeap.set(num, workHeap.get(largestChild));
+            num = largestChild;
         }
-        System.out.println(b.append(heap[i]).append(']').toString());
+        workHeap.set(num, workHeap.get(num));
     }
 
-    private void swap(int firstIndex, int secondIndex) {
-        int temp = heap[firstIndex];
-        heap[firstIndex] = heap[secondIndex];
-        heap[secondIndex] = temp;
-    }
+    class Node {
+        int key;
 
-    // test cases
-    public static void main(String[] args) {
-        int[] a = new int[]{2, 4, 5, 1, 6, 7, 8};
-        Heap maxHeap = new Heap(a);
-        maxHeap.printHeap();
-        maxHeap.buildMaxHeap();
-        maxHeap.printHeap();
-        maxHeap.extractMax();
-        maxHeap.printHeap();
-        maxHeap.insert(12);
-        maxHeap.printHeap();
+        Node(int key) {
+            this.key = key;
+        }
+
     }
 }
+
+class Solution {
+
+    public static void main(String[] args) {
+        var heap = new Heap(6);
+        int[] a = {12, 4, 5};
+        //int[] a = {12, 4, 5, 3, 8, 7};
+        for (var anA : a) {
+            heap.insert(anA);
+
+        }
+    }
+}
+
+
+
+
+
+

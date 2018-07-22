@@ -27,7 +27,7 @@ public class LinkedList {
         return head;
     }
 
-    Node InsertBefore(Node head,int x) {
+    Node InsertBefore(Node head, int x) {
         Node newNode = new Node(5);
         newNode.data = x;
         newNode.next = head;
@@ -35,16 +35,15 @@ public class LinkedList {
     }
 
     public static Node reverse(Node currentNode) {
-
-       Node previousNode=null;
-       Node nextNode;
-        while(currentNode!=null) {
-            nextNode=currentNode.next;
+        Node previousNode = null;
+        Node nextNode;
+        while (currentNode != null) {
+            nextNode = currentNode.next;
             // reversing the link
-            currentNode.next=previousNode;
+            currentNode.next = previousNode;
             // moving currentNode and previousNode by 1 node
-            previousNode=currentNode;
-            currentNode=nextNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
         }
         return previousNode;
 
@@ -68,7 +67,7 @@ public class LinkedList {
         Node cur = head;
 
         // should stop the element before the position to keep track of next
-        while (count < position-1) {
+        while (count < position - 1) {
             cur = cur.next;
             ++count;
         }
@@ -79,7 +78,7 @@ public class LinkedList {
     }
 
     public static void main(String[] args) {
-     LinkedList list = new LinkedList();
-     list.InsertNth(null,3,0);
+        LinkedList list = new LinkedList();
+        list.InsertNth(null, 3, 0);
     }
 }

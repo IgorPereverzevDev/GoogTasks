@@ -59,7 +59,7 @@ public class BinarySearch {
     }
 
     public static void main(String[] args) {
-        int[] array = {27, 9, 105, 3, 2, 5, 2, 1};
+        int[] array = {27};
         int v = 5;
         System.out.println(Arrays.toString(searchInSortedArray(array, v)));
     }

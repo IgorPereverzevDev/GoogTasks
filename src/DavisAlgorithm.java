@@ -1,7 +1,15 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class DavisAlgorithm {
 
 
- static int[][] mul(int[][] a) {
+    public DavisAlgorithm() {
+        List<Double> prices = new ArrayList<Double>();
+        prices.add(42.0);
+    }
+
+    static int[][] mul(int[][] a) {
         int b[][] = {{1, 1, 0}, {1, 0, 1}, {1, 0, 0}};
         int c[][] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
         for (int i = 0; i < 3; i++)

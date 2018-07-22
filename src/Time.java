@@ -5,6 +5,6 @@ public class Time {
     }
 
     public static void main(String[] args) {
-        System.out.println(Time.getTimeAngle(15,15));
+        System.out.println(Time.getTimeAngle(3,27));
     }
 }

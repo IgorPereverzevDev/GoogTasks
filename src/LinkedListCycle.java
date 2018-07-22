@@ -17,8 +17,8 @@ public class LinkedListCycle {
         if (head == null || head.next == null) {
             return false;
         }
-        ListNode slow = head;
-        ListNode fast = head.next;
+        var slow = head;
+        var fast = head.next;
         while (slow != fast) {
             if (fast == null || fast.next == null) {
                 return false;

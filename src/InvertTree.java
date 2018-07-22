@@ -24,8 +24,8 @@ public class InvertTree {
         Queue<Node> queue = new LinkedList<>();
         queue.add(node);
         do {
-            Node current = queue.poll();
-            Node temp = current.left;
+            var current = queue.poll();
+            var temp = current.left;
             current.left = current.right;
             current.right = temp;
             if (current.left != null) queue.add(current.left);
@@ -35,8 +35,8 @@ public class InvertTree {
     }
 
     public static void main(String[] args) {
-        InvertTree tree = new InvertTree();
-        Node root = new Node(4);
+        var tree = new InvertTree();
+        var root = new Node(4);
         root.left = new Node(2);
         root.right = new Node(7);
         root.left.left = new Node(1);
