@@ -72,8 +72,7 @@ public class MyHashMap {
             }
         } else {
             // create new bucket for new element in the map.
-            Entry entryInNewBucket = new Entry(k, v);
-            table[hash] = entryInNewBucket;
+            table[hash] = new Entry(k, v);
         }
     }
 

@@ -23,6 +23,6 @@ public class HourGlassum {
                 {0, 0, 2, 4, 4, 0},
                 {0, 0, 0, 2, 0, 0},
                 {0, 0, 1, 2, 4, 0}};
-        System.out.println(Test.hourglassSum(A));
+        System.out.println(HourGlassum.hourglassSum(A));
     }
 }
