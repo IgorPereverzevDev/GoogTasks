@@ -1,59 +1,53 @@
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.List;
 
 public class Graph {
 
-    static int[] bfs(int n, int m, int[][] edges, int s) {
-        boolean visited[] = new boolean[n];
-        int[] result = new int[n - 1];
+    static int findShortest(int graphNodes, int[][] adjacency_matrix, long[] ids, int val) {
 
-        LinkedList<Integer> queue = new LinkedList<Integer>();
-        Arrays.fill(result, -1);
+        List queue = new LinkedList<Integer>();
 
-        visited[s-1] = true;
-        visited[s] = true;
+        int result = 0;
+        int[] visited = new int[graphNodes + 1];
+        int i, element;
 
-        queue.add(s);
+        visited[val] = 1;
+        queue.add(val);
 
-        while (queue.size() != 0) {
-            int v = queue.poll();
-            for (int[] k : edges) {
-                if (!visited[k[1]]) {
-                    visited[k[1]] = true;
-                    result[v-1] += 7;
+        while (!queue.isEmpty()) {
+            element = 0;//queue.remove();
+            i = element;
+            while (i <= graphNodes) {
+                if (adjacency_matrix[element][i] == 1 && visited[i] == 0) {
+                    queue.add(i);
+                    visited[i] = 1;
                 }
-                queue.add(k[1]);
+                i++;
             }
         }
         return result;
     }
 
-
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        int q = in.nextInt();
-        for (int a0 = 0; a0 < q; a0++) {
-            int n = in.nextInt();
-            int m = in.nextInt();
-            int[][] edges = new int[m][2];
-            for (int edges_i = 0; edges_i < m; edges_i++) {
-                for (int edges_j = 0; edges_j < 2; edges_j++) {
-                    edges[edges_i][edges_j] = in.nextInt();
-                }
-            }
-            int s = in.nextInt();
-            int[] result = bfs(n, m, edges, s);
-            for (int i = 0; i < result.length; i++) {
-                if (i != s - 1) {
-                    if (result[i] == 0) System.out.print("-1 ");
-                    else System.out.print(result[i] + " ");
-                }
-            }
-            System.out.println("");
 
+        int graphNodes = 4;
+        int graphEdges = 3;
 
+        int[] graphFrom = {1, 1, 4};
+        int[] graphTo = {2, 3, 2};
+        long[] ids = {1, 2, 1, 1};
+        int val = 1;
+
+        int adjacency_matrix[][] = new int[graphNodes + 1][graphNodes + 1];
+
+        for (int i = 0; i < graphEdges; ++i) {
+            adjacency_matrix[i][i] = graphFrom[i];
+            for (int j = 0; j < graphEdges; ++j) {
+                adjacency_matrix[i][j] = graphTo[j];
+            }
         }
-        in.close();
+
+        System.out.println(findShortest(graphNodes, adjacency_matrix, ids, val));
+
     }
 }

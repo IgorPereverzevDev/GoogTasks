@@ -4,36 +4,37 @@ import java.util.Stack;
  * Created by zorg9 on 15.12.2017.
  */
 public class Parentheses {
-    static boolean solution(String str) {
+    static int solution(String str) {
         if (str.isEmpty()) {
-            return false;
+            return 1;
         }
         Stack<Character> stack = new Stack<>();
-        var array = str.toCharArray();
-        for (var anArray : array) {
-            if (!stack.contains(anArray)) {
+        char[] array = str.toCharArray();
+        for (char anArray : array) {
                 if (anArray == '(' || anArray == '{' || anArray == '[') {
                     stack.push(anArray);
                 }
                 if (anArray == '}' || anArray == ')' || anArray == ']') {
                     if (stack.empty()) {
-                        return false;
+                        return 0;
                     }
                     char last = stack.peek();
                     if (anArray == '}' && last == '{' || anArray == ')' && last == '(' || anArray == ']' && last == '[') {
                         stack.pop();
                     } else {
-                        return false;
+                        return 0;
                     }
                 }
             }
+        if(!stack.empty()){
+            return 0;
         }
-        return true;
+        return 1;
     }
 
 
     public static void main(String[] args) {
-        var str = "({()})";
+        var str = "(()(())())";
         System.out.println(solution(str));
     }
 

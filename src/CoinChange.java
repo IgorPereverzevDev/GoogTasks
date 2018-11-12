@@ -1,30 +1,51 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class CoinChange {
-    static long countWays(int S[]) {
+    static List<Integer> minCoins(List<Integer> array, int changeAmount) {
 
-        int n = S.length;
-        int table[]=new int[n+1];
+        int n = array.size();
+        int[] count = new int[changeAmount + 1];
+        int[] from = new int[changeAmount + 1];
 
-        // Base case (If given value is 0)
-        table[0] = 1;
+        count[0] = 1;
+        for (int i = 0; i < changeAmount; i++)
+            if (count[i] > 0)
+                for (int j = 0; j < n; j++) {
+                    int p = i + array.get(j);
+                    if (p <= changeAmount) {
+                        if (count[p] == 0 || count[p] > count[i] + 1) {
+                            count[p] = count[i] + 1;
+                            from[p] = j;
+                        }
+                    }
+                }
+        if (count[changeAmount] == 0)
+            return null;
+        int[] result = new int[count[changeAmount] - 1];
+        int k = changeAmount;
+        while (k > 0) {
+            result[count[k] - 2] = array.get(from[k]);
+            k = k - array.get(from[k]);
+        }
 
-        // Pick all coins one by one and update the table[] values
-        // after the index greater than or equal to the value of the
-        // picked coin
-        for(int i=0; i<n; i++)
-            for(int j=S[i]; j<=n; j++)
-                table[j] += table[j-S[i]];
+        return Arrays.stream(result).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 
-        return table[n];
     }
 
-    // Driver Function to test above function
-    public static void main(String args[])
-    {
-        //int arr[] = {41, 34, 46, 9, 37, 32, 42, 21, 7, 13, 1, 24, 3, 43, 2, 23, 8, 45, 19, 30, 29, 18, 35, 11};
-        //int arr[] ={1,2,3};
-        int arr[] = {1, 2, 1, 1};
-        int m = arr.length;
-        int n = 4;
-        System.out.println(countWays(arr));
+    // Driver program
+    public static void main(String[] args) {
+        List<Integer> coins =new ArrayList<>();
+        coins.add(20);
+        coins.add(20);
+        coins.add(10);
+        coins.add(3);
+        coins.add(1);
+        int V = 33;
+        System.out.println("Minimum coins required is "
+                +minCoins(coins, V));
     }
 }

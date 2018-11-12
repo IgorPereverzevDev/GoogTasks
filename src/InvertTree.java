@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.Objects;
 import java.util.Queue;
 
 public class InvertTree {
@@ -13,7 +14,7 @@ public class InvertTree {
         }
     }
 
-    Node getTraverse(Node node) {
+    private Node getTraverse(Node node) {
         if (node == null) {
             return null;
         }
@@ -25,7 +26,7 @@ public class InvertTree {
         queue.add(node);
         do {
             var current = queue.poll();
-            var temp = current.left;
+            var temp = Objects.requireNonNull(current).left;
             current.left = current.right;
             current.right = temp;
             if (current.left != null) queue.add(current.left);

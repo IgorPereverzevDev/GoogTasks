@@ -1,90 +1,101 @@
-public class MyHashMap {
-    // for better re-sizing is taken as 2^4
-    private static final int SIZE = 16;
+class MyHashMap {
 
-    private Entry table[] = new Entry[SIZE];
+    private static int SIZE;
 
-    /**
-     * To store the Map data in key and value pair.
-     * Used linked list approach to avoid the collisions
-     */
+    private Entry table[];
+
+    private Entry e;
+
+
     class Entry {
-        final String key;
-        String value;
+        int key;
+        int value;
         Entry next;
 
-        Entry(String k, String v) {
+        Entry(int k, int v) {
             key = k;
             value = v;
         }
 
-        public String getValue() {
+        int getValue() {
             return value;
         }
 
-        public void setValue(String value) {
+        void setValue(int value) {
             this.value = value;
         }
 
-        public String getKey() {
+        int getKey() {
             return key;
         }
     }
 
-    /**
-     * Returns the entry mapped to key in the HashMap.
-     */
-    public Entry get(String k) {
-        int hash = k.hashCode() % SIZE;
-        Entry e = table[hash];
 
-        // Bucket is identified by hashCode and traversed the bucket
-        // till element is not found.
-        while(e != null) {
-            if(e.key.equals(k)) {
-                return e;
+    /**
+     * Initialize your data structure here.
+     */
+    private MyHashMap() {
+        SIZE = 66000;
+        table = new Entry[SIZE];
+    }
+
+    /**
+     * value will always be non-negative.
+     */
+    private void put(int key, int value) {
+        e = table[key];
+        if (e != null) {
+            if (e.getKey() == key) {
+                e.setValue(value);
+            } else {
+                while (e.next != null) {
+                    e = e.next;
+                }
+                e.next = new Entry(key, value);
+            }
+        } else {
+            table[key] = new Entry(key, value);
+        }
+    }
+
+    /**
+     * Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key
+     */
+    public int get(int key) {
+        e = table[key];
+        while (e != null) {
+            if (e.getKey() == key) {
+                return e.getValue();
             }
             e = e.next;
         }
-        return null;
+        return -1;
     }
 
     /**
-     * If the map previously contained a mapping for the key, the old
-     * value is replaced.
+     * Removes the mapping of the specified value key if this map contains a mapping for the key
      */
-    public void put(String k, String v) {
-        int hash = k.hashCode() % SIZE;
-        Entry e = table[hash];
-
-        if(e != null) {
-            // If we will insert duplicate key-value pair,
-            // Old value will be replaced by new one.
-            if(e.key.equals(k)) {
-                e.value = v;
-            } else {
-                // Collision: insert new element at the end of list
-                // in the same bucket
-                while(e.next != null) {
-                    e = e.next;
-                }
-                e.next = new Entry(k, v);
-            }
-        } else {
-            // create new bucket for new element in the map.
-            table[hash] = new Entry(k, v);
+    private void remove(int key) {
+        e = table[key];
+        if (e != null) {
+            table[key] = null;
         }
     }
 
+
+
+
     public static void main(String[] args) {
-        MyHashMap myHashMap = new MyHashMap();
+        MyHashMap hashMap = new MyHashMap();
+        hashMap.remove(95);
+        hashMap.put(1, 1);
+        hashMap.put(2, 2);
+        hashMap.get(1);            // returns 1
+        hashMap.get(3);            // returns -1 (not found)
+        hashMap.put(2, 1);          // update the existing value
+        hashMap.get(2);            // returns 1
+        hashMap.remove(2);          // remove the mapping for 2
+        hashMap.get(2);            // returns -1 (not found)
 
-        myHashMap.put("Awadh", "SSE");
-        myHashMap.put("Rahul", "SSE");
-        myHashMap.put("Sattu", "SE");
-        myHashMap.put("Gaurav", "SE");
-
-        Entry e = myHashMap.get("Awadh");
-        System.out.println(""+e.getValue());
     }
 }
